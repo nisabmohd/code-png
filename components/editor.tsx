@@ -41,12 +41,12 @@ export default function Editor({
   if (!mounted) return null;
 
   return (
-    <div className="font-code flex flex-col gap-4">
+    <div className="font-code flex flex-col gap-4 h-full">
       <Textarea
         value={code}
         onChange={(e) => setData({ code: e.target.value })}
         spellCheck="false"
-        className="resize-none h-[72vh]"
+        className="resize-none h-[78.5%]"
         placeholder="code snippet"
       />
       <div className="grid grid-cols-2 gap-4">
@@ -91,7 +91,7 @@ export default function Editor({
           <ListOrderedIcon className="w-4 h-4 mr-3" />
           Show Lines
         </Button>
-        <Button variant="outline" onClick={generateUrl}>
+        <Button disabled variant="outline" onClick={generateUrl}>
           <Link2Icon className="w-4 h-4 mr-3" />
           Copy URL
         </Button>

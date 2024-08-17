@@ -23,7 +23,7 @@ const useEditor = create<State & Action>((set) => ({
   code: defaultCode,
   lang: defaultLang,
   highlight: "",
-  lines: true,
+  lines: false,
   setData: (data) => set(data),
 }));
 

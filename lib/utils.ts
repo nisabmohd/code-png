@@ -38,6 +38,17 @@ export function toMarkdown(
   `;
 }
 
-export const defaultCode = `console.log("hello world")`;
-export const defaultLang = "js" satisfies LangKeys;
-export const defaultFilename = "";
+export const defaultCode = `class Node {
+      int val;
+      Node parent, left, right;
+      public Node(int val) {
+          this.val = val;
+      }
+      @Override
+      public String toString() {
+          return Integer.toString(val);
+      }
+}
+`;
+export const defaultLang = "java" satisfies LangKeys;
+export const defaultFilename = "untitled";
