@@ -14,6 +14,8 @@ import rehypePrism from "rehype-prism-plus";
 import { toPng, toSvg } from "html-to-image";
 import download from "downloadjs";
 
+// TODO: Scrollable screenshot capture
+
 const Preview = forwardRef<PreviewRef, {}>((props, ref) => {
   const nodeRef = useRef<HTMLDivElement>(null);
   const { filename, code, lang, highlight, lines } = useEditor();

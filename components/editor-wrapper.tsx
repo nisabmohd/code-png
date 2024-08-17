@@ -31,3 +31,5 @@ export default function EditorWrapper({ urlCode }: { urlCode?: string }) {
     </div>
   );
 }
+
+//  TODO: Mobile responsive
