@@ -44,14 +44,16 @@ const Preview = forwardRef<PreviewRef, {}>((props, ref) => {
 
   function exportAsPng() {
     if (!nodeRef.current) return;
-    toPng(nodeRef.current, { cacheBust: true }).then((dataUrl) => {
-      download(dataUrl, `${filename}.png`);
-    });
+    toPng(nodeRef.current, { cacheBust: true, quality: 1, pixelRatio: 1 }).then(
+      (dataUrl) => {
+        download(dataUrl, `${filename}.png`);
+      }
+    );
   }
 
   function exportAsSvg() {
     if (!nodeRef.current) return;
-    toSvg(nodeRef.current, { cacheBust: true }).then((dataUrl) => {
+    toSvg(nodeRef.current, { cacheBust: true, quality: 1 }).then((dataUrl) => {
       download(dataUrl, `${filename}.svg`);
     });
   }
@@ -63,13 +65,14 @@ const Preview = forwardRef<PreviewRef, {}>((props, ref) => {
 
   if (loading) return "Loading...";
   return (
-    <div className="p-5 font-code flex items-center justify-center h-full overflow-y-auto select-none">
+    <div className="p-5 font-code flex flex-col gap-4 items-center justify-center h-full overflow-y-scroll select-none">
       <div
         ref={nodeRef}
         className="prose prose-zinc dark:prose-invert dark:prose-code:text-neutral-200 prose-code:text-neutral-700 prose-pre:font-code dark:prose-code:bg-neutral-900 dark:prose-pre:bg-neutral-900 prose-code:bg-neutral-100 prose-pre:bg-neutral-100 prose-pre:rounded-t-none prose-pre:rounded-lg max-w-[98%] min-w-[65%] prose-code:whitespace-pre-wrap max-h-full"
       >
         <Topbar filename={filename} />
         {mdxSource && <MDXRemote {...mdxSource} />}
+        <p className="opacity-0 my-1 text-xs -mt-4">Made by Nisab</p>
       </div>
     </div>
   );

@@ -41,15 +41,15 @@ export default function Editor({
   if (!mounted) return null;
 
   return (
-    <div className="font-code flex flex-col gap-4 h-full">
+    <div className="font-code flex flex-col gap-4 h-full p-5">
       <Textarea
         value={code}
         onChange={(e) => setData({ code: e.target.value })}
         spellCheck="false"
-        className="resize-none h-[78.5%]"
+        className="resize-none md:h-[78.5%] h-[50vh]"
         placeholder="code snippet"
       />
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid md:grid-cols-2 grid-cols-1 gap-4">
         <Input
           value={filename}
           onChange={(e) => setData({ filename: e.target.value })}
