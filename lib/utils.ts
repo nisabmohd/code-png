@@ -48,7 +48,6 @@ export const defaultCode = `class Node {
       public String toString() {
           return Integer.toString(val);
       }
-}
-`;
+}`;
 export const defaultLang = "java" satisfies LangKeys;
 export const defaultFilename = "untitled";

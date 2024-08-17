@@ -24,7 +24,7 @@ export default function Editor({
 }) {
   const mounted = useMounted();
   let { filename, code, highlight, lines, lang, setData } = useEditor();
-  const { setTheme } = useTheme();
+  const { setTheme, resolvedTheme } = useTheme();
 
   useEffect(() => {
     if (!urlCode) return;
@@ -75,7 +75,7 @@ export default function Editor({
             ))}
           </SelectContent>
         </Select>
-        <Select onValueChange={setTheme}>
+        <Select value={resolvedTheme} onValueChange={setTheme}>
           <SelectTrigger>
             <SelectValue placeholder="Theme" />
           </SelectTrigger>

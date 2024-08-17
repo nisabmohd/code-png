@@ -44,16 +44,14 @@ const Preview = forwardRef<PreviewRef, {}>((props, ref) => {
 
   function exportAsPng() {
     if (!nodeRef.current) return;
-    toPng(nodeRef.current, { cacheBust: true, quality: 1, pixelRatio: 1 }).then(
-      (dataUrl) => {
-        download(dataUrl, `${filename}.png`);
-      }
-    );
+    toPng(nodeRef.current, { cacheBust: true }).then((dataUrl) => {
+      download(dataUrl, `${filename}.png`);
+    });
   }
 
   function exportAsSvg() {
     if (!nodeRef.current) return;
-    toSvg(nodeRef.current, { cacheBust: true, quality: 1 }).then((dataUrl) => {
+    toSvg(nodeRef.current, { cacheBust: true }).then((dataUrl) => {
       download(dataUrl, `${filename}.svg`);
     });
   }
