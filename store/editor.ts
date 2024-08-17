@@ -1,10 +1,17 @@
-import { defaultCode, defaultFilename, defaultLang, Lang } from "@/lib/utils";
+import {
+  defaultCode,
+  defaultFilename,
+  defaultLang,
+  LangKeys,
+} from "@/lib/utils";
 import { create } from "zustand";
 
 type State = {
   filename: string;
   code: string;
-  lang: Lang;
+  lang: LangKeys;
+  highlight: string;
+  lines: boolean;
 };
 
 type Action = {
@@ -15,6 +22,8 @@ const useEditor = create<State & Action>((set) => ({
   filename: defaultFilename,
   code: defaultCode,
   lang: defaultLang,
+  highlight: "",
+  lines: true,
   setData: (data) => set(data),
 }));
 

@@ -5,21 +5,24 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export type Lang =
-  | "js"
-  | "jsx"
-  | "ts"
-  | "tsx"
-  | "java"
-  | "go"
-  | "py"
-  | "html"
-  | "css"
-  | "bash"
-  | "plaintext";
+export const LangOptions = [
+  { lang: "js", name: "JavaScript" },
+  { lang: "jsx", name: "JavaScript (JSX)" },
+  { lang: "ts", name: "TypeScript" },
+  { lang: "tsx", name: "TypeScript (TSX)" },
+  { lang: "java", name: "Java" },
+  { lang: "go", name: "Go" },
+  { lang: "py", name: "Python" },
+  { lang: "html", name: "HTML" },
+  { lang: "css", name: "CSS" },
+  { lang: "bash", name: "Bash" },
+  { lang: "plaintext", name: "Plain Text" },
+] as const;
+
+export type LangKeys = (typeof LangOptions)[number]["lang"];
 
 type Options = {
-  lang?: Lang;
+  lang?: LangKeys;
   highlight?: string;
   lineNumbers?: boolean;
 };
@@ -29,12 +32,12 @@ export function toMarkdown(
   { lang = defaultLang, highlight = "", lineNumbers = false }: Options
 ) {
   return `
-   \`\`\`${lang} ${highlight} ${lineNumbers ? "showLineNumbers" : ""}
+   \`\`\`${lang} {${highlight}} ${lineNumbers ? "showLineNumbers" : ""}
   ${code}
    \`\`\`
   `;
 }
 
 export const defaultCode = `console.log("hello world")`;
-export const defaultLang = "java" satisfies Lang;
-export const defaultFilename = "untitled";
+export const defaultLang = "js" satisfies LangKeys;
+export const defaultFilename = "";

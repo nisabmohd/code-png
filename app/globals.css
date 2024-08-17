@@ -69,13 +69,11 @@
   }
 }
 
-.prose {
-  margin: 0 !important;
-}
 
 pre {
   width: inherit !important;
   overflow-x: auto;
+  padding: 0 !important;
 }
 
 pre>code {
@@ -85,7 +83,7 @@ pre>code {
 }
 
 .code-line {
-  padding: 0.75px 12.5px;
+  padding: 0.75px 20.5px;
 }
 
 .line-number::before {
