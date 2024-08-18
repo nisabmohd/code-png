@@ -21,7 +21,7 @@ export default function EditorWrapper({ urlCode }: { urlCode?: string }) {
     <div className="h-screen">
       <div className="md:flex hidden h-full">
         <ResizablePanelGroup className="h-full w-full" direction="horizontal">
-          <ResizablePanel minSize={35} defaultSize={35}>
+          <ResizablePanel minSize={25} defaultSize={35}>
             <Editor urlCode={urlCode} exportAs={exportAs} />
           </ResizablePanel>
           <ResizableHandle withHandle />

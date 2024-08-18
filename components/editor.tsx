@@ -14,6 +14,7 @@ import useMounted from "./use-mounted";
 import { useTheme } from "next-themes";
 import { Link2Icon, ListOrderedIcon } from "lucide-react";
 import { LangKeys, LangOptions } from "@/lib/utils";
+import { useToast } from "@/components/ui/use-toast";
 
 export default function Editor({
   urlCode,
@@ -25,17 +26,23 @@ export default function Editor({
   const mounted = useMounted();
   let { filename, code, highlight, lines, lang, setData } = useEditor();
   const { setTheme, resolvedTheme } = useTheme();
+  const { toast } = useToast();
 
   useEffect(() => {
     if (!urlCode) return;
-    // TODO: decode url code
-    // setData({
-    //   code: urlCode,
-    // });
+    setData({
+      code: decodeURIComponent(urlCode),
+    });
   }, [urlCode, setData]);
 
-  function generateUrl() {
-    // TODO: encode to url code
+  function generateUrlAndCopy() {
+    const decoded = encodeURIComponent(code);
+    navigator.clipboard.writeText(
+      `https://code-png.vercel.app/editor?urlCode=${decoded}`
+    );
+    toast({
+      title: "Url copied to clipboard",
+    });
   }
 
   if (!mounted) return null;
@@ -91,14 +98,22 @@ export default function Editor({
           <ListOrderedIcon className="w-4 h-4 mr-3" />
           Show Lines
         </Button>
-        <Button disabled variant="outline" onClick={generateUrl}>
+        <Button variant="outline" disabled={!code} onClick={generateUrlAndCopy}>
           <Link2Icon className="w-4 h-4 mr-3" />
           Copy URL
         </Button>
-        <Button variant="outline" onClick={() => exportAs("svg")}>
+        <Button
+          variant="outline"
+          disabled={!code}
+          onClick={() => exportAs("svg")}
+        >
           Export as SVG
         </Button>
-        <Button variant="outline" onClick={() => exportAs("png")}>
+        <Button
+          variant="outline"
+          disabled={!code}
+          onClick={() => exportAs("png")}
+        >
           Export as PNG
         </Button>
       </div>

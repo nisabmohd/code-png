@@ -14,8 +14,6 @@ import rehypePrism from "rehype-prism-plus";
 import { toPng, toSvg } from "html-to-image";
 import download from "downloadjs";
 
-// TODO: Scrollable screenshot capture
-
 const Preview = forwardRef<PreviewRef, {}>((props, ref) => {
   const nodeRef = useRef<HTMLDivElement>(null);
   const { filename, code, lang, highlight, lines } = useEditor();
@@ -44,16 +42,22 @@ const Preview = forwardRef<PreviewRef, {}>((props, ref) => {
 
   function exportAsPng() {
     if (!nodeRef.current) return;
-    toPng(nodeRef.current, { cacheBust: true }).then((dataUrl) => {
-      download(dataUrl, `${filename}.png`);
-    });
+    const height = nodeRef.current.offsetHeight;
+    toPng(nodeRef.current, { cacheBust: true, pixelRatio: 1, height }).then(
+      (dataUrl) => {
+        download(dataUrl, `${filename}.png`);
+      }
+    );
   }
 
   function exportAsSvg() {
     if (!nodeRef.current) return;
-    toSvg(nodeRef.current, { cacheBust: true }).then((dataUrl) => {
-      download(dataUrl, `${filename}.svg`);
-    });
+    const height = nodeRef.current.offsetHeight;
+    toSvg(nodeRef.current, { cacheBust: true, pixelRatio: 1, height }).then(
+      (dataUrl) => {
+        download(dataUrl, `${filename}.svg`);
+      }
+    );
   }
 
   useImperativeHandle(ref, () => ({
