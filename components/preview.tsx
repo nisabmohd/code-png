@@ -42,22 +42,38 @@ const Preview = forwardRef<PreviewRef, {}>((props, ref) => {
 
   function exportAsPng() {
     if (!nodeRef.current) return;
+    nodeRef.current.classList.add("!max-h-fit");
     const height = nodeRef.current.offsetHeight;
-    toPng(nodeRef.current, { cacheBust: true, pixelRatio: 1, height }).then(
-      (dataUrl) => {
+    toPng(nodeRef.current, {
+      cacheBust: true,
+      pixelRatio: 1,
+      height,
+      quality: 1,
+    })
+      .then((dataUrl) => {
         download(dataUrl, `${filename}.png`);
-      }
-    );
+      })
+      .finally(() => {
+        nodeRef.current!.classList.remove("!max-h-fit");
+      });
   }
 
   function exportAsSvg() {
     if (!nodeRef.current) return;
+    nodeRef.current.classList.add("!max-h-fit");
     const height = nodeRef.current.offsetHeight;
-    toSvg(nodeRef.current, { cacheBust: true, pixelRatio: 1, height }).then(
-      (dataUrl) => {
+    toSvg(nodeRef.current, {
+      cacheBust: true,
+      pixelRatio: 1,
+      height,
+      quality: 1,
+    })
+      .then((dataUrl) => {
         download(dataUrl, `${filename}.svg`);
-      }
-    );
+      })
+      .finally(() => {
+        nodeRef.current!.classList.remove("!max-h-fit");
+      });
   }
 
   useImperativeHandle(ref, () => ({
@@ -72,6 +88,7 @@ const Preview = forwardRef<PreviewRef, {}>((props, ref) => {
         ref={nodeRef}
         className="prose prose-zinc dark:prose-invert dark:prose-code:text-neutral-200 prose-code:text-neutral-700 prose-pre:font-code dark:prose-code:bg-neutral-900 dark:prose-pre:bg-neutral-900 prose-code:bg-neutral-100 prose-pre:bg-neutral-100 prose-pre:rounded-t-none prose-pre:rounded-lg max-w-[98%] min-w-[65%] prose-code:whitespace-pre-wrap max-h-full"
       >
+        <p className="opacity-0 my-1 text-xs -mt-4">Made by Nisab</p>
         <Topbar filename={filename} />
         {mdxSource && <MDXRemote {...mdxSource} />}
         <p className="opacity-0 my-1 text-xs -mt-4">Made by Nisab</p>

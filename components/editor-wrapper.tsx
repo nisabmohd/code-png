@@ -19,7 +19,7 @@ export default function EditorWrapper({ urlCode }: { urlCode?: string }) {
 
   return (
     <div className="h-screen">
-      <div className="md:flex hidden h-full">
+      <div className="h-full">
         <ResizablePanelGroup className="h-full w-full" direction="horizontal">
           <ResizablePanel minSize={25} defaultSize={35}>
             <Editor urlCode={urlCode} exportAs={exportAs} />
@@ -29,12 +29,6 @@ export default function EditorWrapper({ urlCode }: { urlCode?: string }) {
             <Preview ref={ref} />
           </ResizablePanel>
         </ResizablePanelGroup>
-      </div>
-      <div className="md:hidden flex flex-col">
-        <div className="-mb-8 sm:mb-0">
-          <Preview ref={ref} />
-        </div>
-        <Editor urlCode={urlCode} exportAs={exportAs} />
       </div>
     </div>
   );
